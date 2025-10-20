@@ -1,24 +1,19 @@
 {
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    // File Layout
-    "rootDir": "./src",
-    "outDir": "./dist",
-
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
+    "target": "ES6",
     "module": "nodenext",
-    "target": "esnext",
-    // For nodejs:
+    "outDir": "./dist",
     "lib": ["esnext"],
     "types": ["node"],
-    // and npm install -D @types/node
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
 
-    // Other Outputs
+      // Other Outputs
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
-
 
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
@@ -30,8 +25,7 @@
      "noUnusedLocals": true,
      "moduleResolution": "nodenext",
 
-    // Recommended Options
-    "strict": true,
+
     "jsx": "react-jsx",
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
@@ -39,9 +33,13 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
   },
-    "include": [
+  "include": [
+    ".eleventy.config.js",
     "src/**/*.ts",
-    "src/**/*.js"
+    "src/**/*.tsx",
+    "src/**/*.js",
+    "src/_includes/**/*.tsx",  // ← Add this line
+    "src/_includes/**/*.ts" 
   ],
   "exclude": [
     "node_modules",
