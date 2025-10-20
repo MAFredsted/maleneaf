@@ -1,0 +1,36 @@
+{
+  "name": "maleneaf",
+  "version": "1.0.0",
+  "description": "A portfolio and blogging website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AAFredsted/maleneaf.git"
+  },
+  "keywords": [
+    "blog",
+    "learning",
+    "portfolio",
+    "articles"
+  ],
+  "author": "Malene Andrä-Fredsted",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AAFredsted/maleneaf/issues"
+  },
+  "homepage": "https://github.com/AAFredsted/maleneaf#readme",
+  "dependencies": {
+    "lit": "^3.3.1"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "@types/node": "^24.9.0",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.38.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.11"
+  }
+}
