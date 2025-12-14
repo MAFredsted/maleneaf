@@ -1,41 +1,82 @@
+import EleventyVitePlugin from '@11ty/eleventy-plugin-vite'
+import litPlugin from '@lit-labs/eleventy-plugin-lit'
+
 import "tsx/esm"
+import { render } from '@lit-labs/ssr'
+import { pathToFileURL } from 'url'
+import { resolve } from 'path'
 
-export default function (eleventyConfig) {
-  // Add support for TSX files with lit-html
-  eleventyConfig.addExtension(["11ty.jsx", "11ty.ts", "11ty.tsx"], {
-    key: "11ty.js",
-    compile: function (inputContent, inputPath) {
-      return async function (data) {
-        const module = await import(inputPath)
-        
-        const component = module.default
-      
-        // If it's a function, call it with data
-        if (typeof component === 'function') {
-          return component(data)
-        }
-        
-
-        
-        return inputContent
+export default (eleventyConfig) => {
+  eleventyConfig.addPlugin(EleventyVitePlugin, {
+    viteOptions: {
+      build: {
+        lib: {
+          entry: resolve(process.cwd(), 'src/components/index.ts'),
+          formats: ['es'],
+          fileName: () => 'js/components.js'
+        },
+        outDir: resolve(process.cwd(), '_site'),
+        emptyOutDir: false,
+      },
+      server: {
+        fs: { allow: [process.cwd()] }
       }
-    },
+    }
+  })
+  eleventyConfig.addTemplateFormats('11ty.tsx')
+
+  eleventyConfig.addExtension('11ty.tsx', {
+    key: "11ty.js",
+    outputFileExtension: "html",
+    compile: async (_, inputPath) => {
+      return async (data = {}) => {
+        const mod = await import(pathToFileURL(inputPath).href)
+        const exported = mod.default ?? mod
+
+        // Call function exports or use the export value directly
+        let result
+        if (typeof exported === 'function') {
+          result = await exported(data)
+        } else {
+          result = exported
+        }
+
+        // If it's already a string, return
+        if (typeof result === 'string') return result
+
+        // If it's a Lit TemplateResult, serialize with @lit-labs/ssr
+        try {
+          const ssr = await import('@lit-labs/ssr')
+          if (typeof ssr.renderToString === 'function') {
+            return await ssr.renderToString(result)
+          }
+          if (typeof ssr.render === 'function') {
+            let out = ''
+            for await (const chunk of ssr.render(result)) out += chunk
+            return out
+          }
+        } catch (e) {
+          // fall through to fallback
+        }
+
+        // Fallback: coerce to string
+        return String(result ?? '')
+      }
+    }
   })
 
-  // Copy static assets
-  eleventyConfig.addPassthroughCopy('src/styles')
-  eleventyConfig.addPassthroughCopy('src/components')
-  
-  // Watch for changes
-  eleventyConfig.addWatchTarget('src/components/')
-  eleventyConfig.addWatchTarget('src/styles/')
+  eleventyConfig.addPlugin(litPlugin, {
+    componentModules: ["./_site/js/components.js"]
+  })
 
   return {
-    dir: {
-      input: "src",
-      output: "_site",
-      includes: '_includes',
-      data: '_data'
-    }
+    dir:
+      {
+        input: "src/pages",
+        data: "_data",
+        includes: "_includes",
+        output: "_site"
+      },
+      templateFormats: ["11ty.tsx", "html", "md"]
   }
 }
