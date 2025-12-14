@@ -68,6 +68,8 @@ export default (eleventyConfig) => {
   eleventyConfig.addPlugin(litPlugin, {
     componentModules: ["./_site/js/components.js"]
   })
+  eleventyConfig.addPassthroughCopy('src/pages/css')
+  eleventyConfig.addPassthroughCopy('src/pages/files')
 
   return {
     dir:
