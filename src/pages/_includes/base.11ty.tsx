@@ -1,9 +1,10 @@
 import { html } from 'lit/static-html.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
-import header from './header.11ty'
+import header from './header.11ty.js'
+import type { EleventyData } from '../../../types/eleventy.js'
 
 
-export default (data: any) => {
+export default (data: EleventyData ) => {
   const content = data.content || ""
   return html`
     <!DOCTYPE html>

@@ -1,4 +1,5 @@
 import { html } from 'lit/static-html.js'
+import type { EleventyData} from '../../types/eleventy.js'
 
 export const data = {
   title: 'Home',
@@ -10,7 +11,7 @@ export const data = {
 }
 
 
-export default (data: any) => {
+export default (data: EleventyData ) => {
   return html`
     <main>
       <h1>Welcome to my 11ty + Lit + TSX site</h1>

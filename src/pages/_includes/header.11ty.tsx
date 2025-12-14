@@ -1,6 +1,7 @@
 import { html } from 'lit/static-html.js'
+import type { EleventyData } from '../../../types/eleventy.js'
 
-export default (data: any) => {
+export default (data: EleventyData ) => {
   const pages = data.collections?.all || []
 
   return html`
