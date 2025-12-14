@@ -19,6 +19,8 @@ export default (data: any) => {
       <div class="somediv">
 
       </div>
+
+      <overview-modal id="modal"></overview-modal>
     </main>
     <link rel="stylesheet" href="./css/maleneaf.css">
     <link rel="icon" type="image/x-icon" href="/files/favicon.ico">

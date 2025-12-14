@@ -66,7 +66,8 @@ export default (eleventyConfig) => {
   })
 
   eleventyConfig.addPlugin(litPlugin, {
-    componentModules: ["./_site/js/components.js"]
+    componentModules: ["./_site/js/components.js"],
+    mode: 'vm'
   })
   eleventyConfig.addPassthroughCopy('src/pages/css')
   eleventyConfig.addPassthroughCopy('src/pages/files')
