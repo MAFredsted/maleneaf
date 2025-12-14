@@ -1,2 +1,2 @@
-import './first-element.tsx'
+import './first-element.js'
 export { OverviewModal } from './modal.js'
