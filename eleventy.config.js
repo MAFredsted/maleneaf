@@ -64,6 +64,13 @@ export default (eleventyConfig) => {
       }
     }
   })
+  eleventyConfig.addDataExtension("ts", {
+    parser: async ( contents, filePath ) => {
+      const mod = await import(pathToFileURL(filePath).href)
+      return mod.default ?? mod
+    },
+    read: false
+  })
 
   eleventyConfig.addPlugin(litPlugin, {
     componentModules: ["./_site/js/components.js"],
