@@ -345,6 +345,14 @@ h5 {
   color: var(--color-orange);
 }
 
+/* Logo image sizing */
+.maleneaf-logo img {
+  height: 12rem; /* 48px - adjust this value */
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
 .maleneaf-hero {
   background: linear-gradient(to bottom, var(--bg-primary-1), var(--bg-accent-1));
   padding: clamp(var(--space-3xl), 10vh, var(--space-5xl)) var(--space-xl);

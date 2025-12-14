@@ -6,7 +6,7 @@
   "scripts": {
     "build:components": "vite build",
     "dev": "vite build --watch & NODE_OPTIONS=--experimental-vm-modules eleventy --serve",
-    "build": "npm run typecheck && npm run build:components && eleventy",
+    "build": "npm run typecheck && npm run build:components && NODE_OPTIONS=--experimental-vm-modules eleventy",
     "typecheck": "tsc --noEmit",
     "typecheck:watch": "tsc --noEmit --watch",
     "lint": "eslint",

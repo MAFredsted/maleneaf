@@ -12,7 +12,7 @@ export default (data: MainPage ) => {
     <header class="maleneaf-header">
         <div class="maleneaf-header-top">
           <a href="/" class="maleneaf-logo">
-            <img src="/files/logo.svg" alt="${data.site?.title || 'Error: missing logo text'}"/>
+            <img src="/files/logo.png" alt="${data.site?.title || 'Error: missing logo text'}"/>
           </a>
           
           <nav class="maleneaf-header-nav">
