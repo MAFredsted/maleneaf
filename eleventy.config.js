@@ -17,10 +17,14 @@ export default (eleventyConfig) => {
         },
         outDir: resolve(process.cwd(), '_site'),
         emptyOutDir: false,
+        rollupOptions: {
+          external: [/\.svg$/]
+        }
       },
       server: {
         fs: { allow: [process.cwd()] }
-      }
+      },
+      assetsInclude: ['**/*.svg']
     }
   })
   eleventyConfig.addTemplateFormats('11ty.tsx')
@@ -78,7 +82,6 @@ export default (eleventyConfig) => {
   })
   eleventyConfig.addPassthroughCopy('src/pages/css')
   eleventyConfig.addPassthroughCopy('src/pages/files')
-
   return {
     dir:
       {

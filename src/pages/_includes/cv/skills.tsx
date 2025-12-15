@@ -21,7 +21,7 @@ export default (skills: Skill[]) => {
       <section class="maf-cv-section">
         <h2 class="maf-cv-section-title">Language Proficiencies</h2>
         <div class="maf-cv-section">
-          <p>${languageSkills[0].items.join(', ')}</p>
+          <p class="text-orange">${languageSkills[0].items.join(', ')}</p>
         </div>
       </section>
     ` : ''}

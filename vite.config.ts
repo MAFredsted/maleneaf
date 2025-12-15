@@ -7,7 +7,12 @@ export default defineConfig({
       formats: ['es'],
       fileName: () => 'js/components.js'
     },
+
     outDir: '_site',
-    emptyOutDir: false
-  }
+    emptyOutDir: false,
+    rollupOptions: {
+      external: [/\.svg$/]
+    },
+  },
+  assetsInclude: ['**/*.svg']
 })
