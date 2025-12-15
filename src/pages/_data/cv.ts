@@ -17,31 +17,31 @@ const kdsProjects: Project[] = [
   {
     id: 'dataforsyningen',
     name: 'Dataforsyningen',
-    description: 'Public map and data services',
+    description: 'Search and access all open geospatial data made available by KDS',
     link: 'https://dataforsyningen.dk/'
   },
   {
     id: 'historical-maps',
     name: 'Historical Maps',
-    description: 'Historical map viewing service',
+    description: 'Search, display and download Historical maps of Denmark dating back to the 1500\'s',
     link: 'https://historiskekort.dk/'
   },
   {
     id: 'hip',
     name: 'Hydrological Index and Forecast System',
-    description: 'Hydrological data and forecasting',
+    description: 'Access, visualize and analyze hydological forecasts for Denmark',
     link: 'https://hip.dataforsyningen.dk/'
   },
   {
     id: 'coordinate-transformation',
     name: 'Coordinate Transformation',
-    description: 'Coordinate system transformation tool',
+    description: 'Coordinate system transformation tool used for internal projects',
     link: 'https://koordinattransformation.dk/Denmark'
   },
   {
     id: 'dawa',
     name: 'DAWA (Danish Address Web API)',
-    description: 'Backend service for Danish addresses',
+    description: 'Backend service providing access to danish adresses through REST-API',
     link: 'https://dawadocs.dataforsyningen.dk/'
   }
 ]
@@ -71,11 +71,11 @@ const workExperience: WorkExperience[] = [
   {
     id: 'kds-it-support',
     company: 'The Agency for Climate Data (KDS)',
-    position: 'Student IT Support',
+    position: 'Student IT Support, Danish Placename Registry',
     location: 'Copenhagen, Denmark',
     startDate: new Date('2021-01-01'),
     endDate: new Date('2024-01-01'),
-    description: 'Provided IT support and assistance',
+    description: 'Provided IT support and assistance for websites and services such as Dataforsyningen, LER and DAWA, and worked on maintaining and expanding the danish place name registry through ArcGIS Pro.',
     responsibilities: []
   }
 ]
@@ -130,7 +130,7 @@ const education: Education[] = [
     id: 'itu-msc',
     institution: 'IT University of Copenhagen (ITU)',
     degree: 'M.Sc.',
-    title: 'Software Design (Cand.IT.)',
+    title: 'Software Design (Cand.IT. Software Technology and Development)',
     location: 'Copenhagen, Denmark',
     startDate: new Date('2023-09-01'),
     endDate: new Date('2026-01-31'),

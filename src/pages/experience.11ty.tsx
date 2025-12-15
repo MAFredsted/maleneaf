@@ -3,10 +3,11 @@ import type { WorkExperiencePageData } from '../../types/eleventy.js'
 import cvWorkExperience from './_includes/cv/workExperience.11ty.js'
 import cvEducation from './_includes/cv/education.js'
 import cvSkills from './_includes/cv/skills.js'
+import cvProfile from './_includes/cv/profile.js'
 
 export const data = {
-  title: 'Curriculum Vitae',
-  description: 'My professional and educational journey',
+  title: 'Professional Profile',
+  description: 'vocational and educational experience',
   layout: 'base.11ty.tsx',
   eleventyNavigation: {
     key: 'CV',
@@ -24,6 +25,7 @@ export default (data: WorkExperiencePageData) => {
   
   return html`
     <main class="maf-cv-container">
+      ${cvProfile(profile)}
       ${cvWorkExperience(workExperience, formatDate)}
       ${cvEducation(education, formatDate)}
       ${cvSkills(skills)}
