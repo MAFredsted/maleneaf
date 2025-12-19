@@ -480,12 +480,11 @@ h5 {
 .maf-cv-entry-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: flex-end;
   margin-bottom: var(--space-lg);
   padding-bottom: var(--space-md);
   border-bottom: 0.0625rem solid var(--color-maroon-pale);
   gap: var(--space-lg);
-  flex-wrap: wrap;
 }
 
 /* Entry Title & Subtitle */

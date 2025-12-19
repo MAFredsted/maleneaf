@@ -130,7 +130,7 @@ const education: Education[] = [
     id: 'itu-msc',
     institution: 'IT University of Copenhagen (ITU)',
     degree: 'M.Sc.',
-    title: 'Software Design (Cand.IT. Software Technology and Development)',
+    title: 'Software Design (Cand.IT)',
     location: 'Copenhagen, Denmark',
     startDate: new Date('2023-09-01'),
     endDate: new Date('2026-01-31'),

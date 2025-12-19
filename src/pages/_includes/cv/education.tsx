@@ -9,8 +9,8 @@ export default (education: Education[], formatDate: (date: Date | 'Present') => 
         <article class="maf-cv-entry">
           <div class="maf-cv-entry-header">
             <div>
-              <h3 class="maf-cv-entry-title">${edu.degree}</h3>
-              <h4 class="maf-cv-entry-subtitle">${edu.institution}, ${edu.title}</h4>
+              <h3 class="maf-cv-entry-title">${edu.degree} ${edu.title}</h3>
+              <h4 class="maf-cv-entry-subtitle">${edu.institution}</h4>
             </div>
             <p class="maf-cv-entry-meta">
               ${edu.location}<br/>

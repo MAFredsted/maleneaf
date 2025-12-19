@@ -13,7 +13,7 @@ export default (experiences: WorkExperience[], formatDate: (date: Date | 'Presen
               <h4 class="maf-cv-entry-subtitle">${exp.company}</h4>
             </div>
             <p class="maf-cv-entry-meta">
-              ${exp.location} | 
+              ${exp.location} <br>
               ${formatDate(exp.startDate)} - 
               ${formatDate(exp.endDate)}
             </p>
