@@ -115,3 +115,37 @@ export interface WorkExperiencePageData extends MainPage {
     skills: Skill[]
   }
 }
+
+
+/*
+Blog Types
+
+We need a type to represent a the blogoverview, (a spezialisation of mainpage that contains blogentries)
+
+Blogentries are a spezialisation of mainpage with 
+
+header, date, content (some markdown), tags, language and more 
+
+The idea for the structure is 
+
+
+blog.11ty.tsx in src
+
+which has blogtool.txt from components (lit component that uses blog entries for searching etc)
+
+and a lot of blogentries 
+*/
+
+export interface BlogEntry extends MainPage {
+ tags: string[]
+ title: string
+ author: string
+ date: Date
+ language: 'DA' | 'EN' | 'DE'
+ content: string //the markdown
+ highlight: boolean
+}
+export interface BlogEntriesOverview extends MainPage {
+  entries : BlogEntry[]
+}
+
