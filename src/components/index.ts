@@ -1,2 +1,1 @@
-import './first-element.js'
-export { OverviewModal } from './modal.js'
+export { BlogTool } from './blog-overview.js'

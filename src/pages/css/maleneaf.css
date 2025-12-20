@@ -621,6 +621,17 @@ h5 {
   min-width: 12rem;
 }
 
+
+/* Success / Failure */
+
+.maf-success {
+  color: var(--text-primary-1);
+  font-weight: var(--font-weight-semibold);
+}
+.maf-error {
+  color: var(--text-primary-1);
+  font-weight: var(--font-weight-semibold);
+}
 /* Responsive Styles */
 @media (max-width: 48em) {
   .maf-cv-container {
