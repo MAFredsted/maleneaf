@@ -11,22 +11,27 @@ export default (eleventyConfig) => {
     viteOptions: {
       build: {
         lib: {
-          entry: resolve(process.cwd(), 'src/components/index.ts'),
+          entry: resolve(process.cwd(), 'src/components/index.js'),
           formats: ['es'],
           fileName: () => 'js/components.js'
         },
         outDir: resolve(process.cwd(), '_site'),
         emptyOutDir: false,
         rollupOptions: {
-          external: [/\.svg$/]
+          external: (id) => {
+            if (id.endsWith('.svg')) return true
+            return false
+          }        
         }
       },
       server: {
         fs: { allow: [process.cwd()] }
       },
       assetsInclude: ['**/*.svg']
-    }
+    },
+    inject: false
   })
+
   eleventyConfig.addTemplateFormats('11ty.tsx')
 
   eleventyConfig.addExtension('11ty.tsx', {
@@ -77,11 +82,15 @@ export default (eleventyConfig) => {
   })
 
   eleventyConfig.addPlugin(litPlugin, {
-    componentModules: ["./_site/js/components.js"],
-    mode: 'vm'
+    mode: 'worker',
+    componentModules: ['./ssr/src/components/index.js']
   })
   eleventyConfig.addPassthroughCopy('src/pages/css')
   eleventyConfig.addPassthroughCopy('src/pages/files')
+  //eleventyConfig.addPassthroughCopy('node_modules/lit')
+  eleventyConfig.addPassthroughCopy('node_modules/@lit-labs/ssr-client')
+  eleventyConfig.addPassthroughCopy('node_modules/@webcomponents/template-shadowroot')
+  eleventyConfig.addWatchTarget('src/components')
   return {
     dir:
       {
