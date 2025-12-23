@@ -70,7 +70,13 @@ export default (data: MainPage ) => {
           // You may also prefer to bundle your components into fewer JS modules.
           // See https://lit.dev/docs/tools/production/#building-with-rollup for
           // more details.
-          import('/js/components.js');
+          await import('/js/components.js');
+          setTimeout(() => {
+            console.log('hydration event client');
+            window.dispatchEvent(new Event('maleneaf-hydrated'));
+            window.__maleneafHydrated = true;
+          }
+          , 0);
         })();
       </script>
     </body>

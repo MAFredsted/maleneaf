@@ -12,5 +12,5 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
   },
-  "include": ["src/**/*", "eleventy.config.js"]
+  "include": ["src/**/*", "eleventy.config.js", "types/css.ts"]
 }

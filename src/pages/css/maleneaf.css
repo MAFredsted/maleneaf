@@ -769,3 +769,21 @@ h5 {
     padding-right: var(--space-xl);
   }
 }
+
+
+/* ==========================================
+   blogtool
+   ========================================== */
+
+
+.maf-articles,
+.maf-search-tool {
+  border: 0.2rem solid var(--bg-secondary-2);
+  border-radius: 2rem;
+  margin: 1rem;
+  padding: 2rem;
+}
+
+.maf-article {
+  
+}
