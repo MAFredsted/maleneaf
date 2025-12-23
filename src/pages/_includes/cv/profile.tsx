@@ -39,7 +39,7 @@ export default (profile: Profile ) => {
            ${link.name}
           </a>
         `
-        )}
+  )}
       </div>
     </section>
 

@@ -10,11 +10,11 @@ export const data = {
   }
 }
 
-
 export default (data: MainPage ) => {
   return html`
     <main class="container bg-secondary-1">
       <h1>Work in Progress </h1>
+      ${data.title}
     </main>
   `
 }

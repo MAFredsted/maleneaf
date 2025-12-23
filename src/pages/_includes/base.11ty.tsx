@@ -3,9 +3,8 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import header from './header.11ty.js'
 import type { MainPage } from '../../../types/eleventy.js'
 
-
 export default (data: MainPage ) => {
-  const content = data.content || ""
+  const content = data.content || ''
   return html`
     <!DOCTYPE html>
     <html lang="en">

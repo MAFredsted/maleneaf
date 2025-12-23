@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build:ssr": "tsc -p tsconfig.ssr.json",
-   "dev": "npm run build:ssr && vite build --watch & NODE_OPTIONS=--experimental-vm-modules eleventy --serve",
+    "dev": "npm run build:ssr && vite build --watch & NODE_OPTIONS=--experimental-vm-modules eleventy --serve",
     "build": "npm run typecheck && npm run build:ssr && vite build && NODE_OPTIONS=--experimental-vm-modules eleventy",
     "typecheck": "tsc --noEmit",
     "typecheck:watch": "tsc --noEmit --watch",
@@ -37,11 +37,14 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@11ty/eleventy-plugin-vite": "^7.1.0-alpha.2",
+    "@eslint/eslintrc": "^3.3.3",
+    "@eslint/js": "^9.39.2",
     "@lit-labs/eleventy-plugin-lit": "^1.0.5",
     "@typescript-eslint/eslint-plugin": "^8.46.2",
     "@typescript-eslint/parser": "^8.46.2",
     "eslint": "^9.38.0",
     "eslint-plugin-lit": "^2.1.1",
+    "globals": "^16.5.0",
     "happy-dom": "^20.0.7",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",

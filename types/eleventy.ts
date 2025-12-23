@@ -17,7 +17,6 @@ export interface PageData {
   }
 }
 
-
 /* Work Experience section */
 
 export interface Project {
@@ -76,7 +75,6 @@ export interface Profile {
   links: Link[]
 }
 
-
 /* pages */
 
 export interface MainPage {
@@ -84,10 +82,10 @@ export interface MainPage {
   title: string
   content: string
   layout?: string
-  
+
   // Site-wide data
   site: SiteData
-  
+
   // Page metadata
   page: {
     url: string
@@ -95,17 +93,16 @@ export interface MainPage {
     inputPath: string
     outputPath: string
   }
-  
+
   // Collections
   collections: {
     all: PageData[]
     [key: string]: PageData[]
   }
-  
+
   // Allow additional properties
   [key: string]: any
 }
-
 
 export interface WorkExperiencePageData extends MainPage {
   cv: {
@@ -116,36 +113,40 @@ export interface WorkExperiencePageData extends MainPage {
   }
 }
 
-
 /*
 Blog Types
 
 We need a type to represent a the blogoverview, (a spezialisation of mainpage that contains blogentries)
 
-Blogentries are a spezialisation of mainpage with 
+Blogentries are a spezialisation of mainpage with
 
-header, date, content (some markdown), tags, language and more 
+header, date, content (some markdown), tags, language and more
 
-The idea for the structure is 
-
+The idea for the structure is
 
 blog.11ty.tsx in src
 
 which has blogtool.txt from components (lit component that uses blog entries for searching etc)
 
-and a lot of blogentries 
+and a lot of blogentries
 */
 
-export interface BlogEntry extends MainPage {
- tags: string[]
- title: string
- author: string
- date: Date
- language: 'DA' | 'EN' | 'DE'
- content: string //the markdown
- highlight: boolean
+export interface BlogEntry {
+  title: string
+  url: string
+  author: string
+  tags: string[]
+  date: Date
+  language: 'DA' | 'EN' | 'DE'
+  description: string
+  highlight: boolean
 }
 export interface BlogEntriesOverview extends MainPage {
-  entries : BlogEntry[]
+  collections: {
+    all: PageData[]
+    posts: BlogEntry[]
+    // allow other collections whose members are plain serializable arrays
+    [key: string]: any[]
+  }
 }
 

@@ -1,8 +1,7 @@
 import EleventyVitePlugin from '@11ty/eleventy-plugin-vite'
 import litPlugin from '@lit-labs/eleventy-plugin-lit'
 
-import "tsx/esm"
-import { render } from '@lit-labs/ssr'
+import 'tsx/esm'
 import { pathToFileURL } from 'url'
 import { resolve } from 'path'
 
@@ -21,7 +20,7 @@ export default (eleventyConfig) => {
           external: (id) => {
             if (id.endsWith('.svg')) return true
             return false
-          }        
+          }
         }
       },
       server: {
@@ -35,8 +34,8 @@ export default (eleventyConfig) => {
   eleventyConfig.addTemplateFormats('11ty.tsx')
 
   eleventyConfig.addExtension('11ty.tsx', {
-    key: "11ty.js",
-    outputFileExtension: "html",
+    key: '11ty.js',
+    outputFileExtension: 'html',
     compile: async (_, inputPath) => {
       return async (data = {}) => {
         const mod = await import(pathToFileURL(inputPath).href)
@@ -65,7 +64,7 @@ export default (eleventyConfig) => {
             return out
           }
         } catch (e) {
-          // fall through to fallback
+          console.warn(e.message)
         }
 
         // Fallback: coerce to string
@@ -73,7 +72,7 @@ export default (eleventyConfig) => {
       }
     }
   })
-  eleventyConfig.addDataExtension("ts", {
+  eleventyConfig.addDataExtension('ts', {
     parser: async ( contents, filePath ) => {
       const mod = await import(pathToFileURL(filePath).href)
       return mod.default ?? mod
@@ -91,14 +90,32 @@ export default (eleventyConfig) => {
   eleventyConfig.addPassthroughCopy('node_modules/@lit-labs/ssr-client')
   eleventyConfig.addPassthroughCopy('node_modules/@webcomponents/template-shadowroot')
   eleventyConfig.addWatchTarget('src/components')
+
+  // add data entry covering blog entries
+  eleventyConfig.addCollection('posts', function (collectionApi) {
+    // Also accepts an array of globs!
+    return collectionApi.getFilteredByGlob(['src/pages/posts/*.md']).map(post => {
+      const postData = post.data
+      return {
+        title: postData.title || '[posts] Error: Post does not contain title attribute',
+        url: post.url || '[posts] Error: Post does not contain url attribute',
+        author: postData.author || '[posts] Error: Post does not contain author attribute',
+        tags: postData.tags || [],
+        date: postData.date || null,
+        language: postData.language || '',
+        description: postData.description || '[posts] Error: Post does not contain summary attribute',
+        highlight: postData.highlight || null
+      }
+    })
+  })
   return {
     dir:
       {
-        input: "src/pages",
-        data: "_data",
-        includes: "_includes",
-        output: "_site"
+        input: 'src/pages',
+        data: '_data',
+        includes: '_includes',
+        output: '_site'
       },
-      templateFormats: ["11ty.tsx", "html", "md"]
+    templateFormats: ['11ty.tsx', 'html', 'md']
   }
 }

@@ -17,12 +17,12 @@ export const data = {
 
 export default (data: WorkExperiencePageData) => {
   const { workExperience, education, skills, profile } = data.cv
-  
+
   const formatDate = (date: Date | 'Present') => {
     if (date === 'Present') return 'Present'
     return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
   }
-  
+
   return html`
     <main class="maf-cv-container">
       ${cvProfile(profile)}

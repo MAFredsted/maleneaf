@@ -6,7 +6,7 @@ export default (data: MainPage ) => {
   // Use page-level title/description, fallback to site-level
   const pageTitle = data.title || data.site?.title || 'Error: missing title property'
   const pageDescription = data.description || data.site?.description || 'Error: missing description property'
-  
+
   console.log(data.page)
   return html`
     <header class="maleneaf-header">
@@ -17,15 +17,15 @@ export default (data: MainPage ) => {
           
           <nav class="maleneaf-header-nav">
             ${pages
-              .filter((page: any) => page.data.eleventyNavigation)
-              .map((page: any) => html`
+    .filter((page: any) => page.data.eleventyNavigation)
+    .map((page: any) => html`
                 <a href="${page.url}"
                   class="${page.url == data.page?.url ? 'active' : ''}"
                   >
                   ${page.data.eleventyNavigation.key}
                 </a>
               `
-              )}
+    )}
           </nav>
         </div>
 

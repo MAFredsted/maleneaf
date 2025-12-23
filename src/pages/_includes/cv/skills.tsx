@@ -4,7 +4,7 @@ import type { Skill } from '../../../../types/eleventy.js'
 export default (skills: Skill[]) => {
   const technicalSkills = skills.filter(s => s.category !== 'Spoken Languages')
   const languageSkills = skills.filter(s => s.category === 'Spoken Languages')
-  
+
   return html`
     <section class="maf-cv-section">
       <h2 class="maf-cv-section-title">Technical Skills</h2>
