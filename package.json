@@ -4,6 +4,7 @@
   "description": "A project/blogging site",
   "type": "module",
   "scripts": {
+    "gen:styles":  "node scripts/genStyles.js",
     "build:ssr": "tsc -p tsconfig.ssr.json",
     "dev": "npm run build:ssr && vite build --watch & NODE_OPTIONS=--experimental-vm-modules eleventy --serve",
     "build": "npm run typecheck && npm run build:ssr && vite build && NODE_OPTIONS=--experimental-vm-modules eleventy",
@@ -32,6 +33,7 @@
   "homepage": "https://github.com/AAFredsted/maleneaf#readme",
   "dependencies": {
     "@webcomponents/template-shadowroot": "^0.2.1",
+    "fs": "^0.0.1-security",
     "lit": "^3.3.1"
   },
   "devDependencies": {

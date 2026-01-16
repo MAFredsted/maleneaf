@@ -14,6 +14,7 @@ export default defineConfig({
       // only externalize assets like svg; DO NOT externalize 'lit'
       external: (id) => {
         if (id.endsWith('.svg')) return true
+        if (id === 'fs' || id === 'path' || id === 'url') return true
         return false
       }
     }
@@ -21,5 +22,12 @@ export default defineConfig({
   server: {
     fs: { allow: [process.cwd()] }
   },
-  assetsInclude: ['**/*.svg']
+  assetsInclude: ['**/*.svg'],
+  resolve: {
+    alias: {
+      'fs': 'fs',
+      'path': 'path', 
+      'url': 'url'
+    }
+  }
 })

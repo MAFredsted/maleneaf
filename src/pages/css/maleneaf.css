@@ -689,7 +689,7 @@ h5 {
    ========================================== */
 
 /* Buttons */
-.btn {
+button {
   display: inline-block;
   padding: var(--space-sm) var(--space-lg);
   font-family: var(--font-body);
@@ -707,7 +707,8 @@ h5 {
   color: var(--color-light);
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary-active {
   background-color: var(--color-orange-darker);
   transform: translateY(-0.125rem);
   box-shadow: var(--shadow-md);
@@ -729,7 +730,7 @@ h5 {
   color: var(--color-maroon);
   border: 0.125rem solid var(--color-maroon);
 }
-
+.btn-outline-active,
 .btn-outline:hover {
   background-color: var(--color-maroon);
   color: var(--color-light);
@@ -771,19 +772,3 @@ h5 {
 }
 
 
-/* ==========================================
-   blogtool
-   ========================================== */
-
-
-.maf-articles,
-.maf-search-tool {
-  border: 0.2rem solid var(--bg-secondary-2);
-  border-radius: 2rem;
-  margin: 1rem;
-  padding: 2rem;
-}
-
-.maf-article {
-  
-}

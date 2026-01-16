@@ -1,18 +1,32 @@
 // ...existing code...
-import { html, css, LitElement, unsafeCSS } from 'lit'
+import { html, css, LitElement, unsafeCSS, isServer} from 'lit'
 import { property, state } from 'lit/decorators.js'
-import type { BlogEntry } from '../../types/eleventy.js'
+import { baseStyles } from './baseStyles.js'
 
+import type { BlogEntry } from '../../types/eleventy.js'
+import type { PropertyValues } from 'lit'
 
 
 export class BlogTool extends LitElement {
 
+  static styles = [
+    baseStyles,
+    css`
+      .maf-articles,
+      .maf-search-tool {
+        border: 0.2rem solid var(--bg-secondary-2);
+        border-radius: 2rem;
+        margin: 1rem;
+        padding: 2rem;
+      }
+    `
+
+  ]
   // Parse JSON attribute into a typed array before first render
   @property({
     attribute: 'data-entries',
     converter: {
       fromAttribute(value: string) {
-        console.log('dataentries is', value)
         try { return JSON.parse(value || '[]') as BlogEntry[] }
         catch { return [] }
       },
@@ -22,51 +36,71 @@ export class BlogTool extends LitElement {
   public entries: BlogEntry[]   = []
 
   @state() private tagSet: Set<string> = new Set<string>()
+  @state() private activeTags: Set<string> = new Set<string>()
+
+
+  onHydrated = (): void => {
+    this.tagSet = new Set<string>(
+        this.entries
+          .flatMap(entry => entry.tags || [])
+    )
+
+    this.requestUpdate()
+  }
 
   connectedCallback(): void {
     super.connectedCallback()
-    const onHydrated = (): void => {
-      console.log('we call onhydrated')
-      this.tagSet = new Set<string>(
-          this.entries
-            .flatMap(entry => entry.tags || [])
-      )
-      console.log('onhydrated new tagSet', this.tagSet)
-      this.requestUpdate()
-    }
-    window.addEventListener('maleneaf-hydrated', onHydrated, { once: true })
+    window.addEventListener('maleneaf-hydrated', this.onHydrated, { once: true })
+
     if ((window as any).__maleneafHydrated) {
-      onHydrated()
+      this.onHydrated()
     }    
   }
 
+  
+  toggleTag = (tag: string) => {
+    if (this.activeTags.has(tag)) {
+      this.activeTags.delete(tag)
+    } else {
+      this.activeTags.add(tag)
+    }
+    this.requestUpdate()
+  }
+
+  filterArticles = () => {
+    if(this.activeTags.size === 0 ) {
+      return this.entries
+    }
+    else return this.entries.filter(entry => entry.tags.some(tag => this.activeTags.has(tag)))
+
+  }
   goToArticle = (url: string) => {
     window.location.href=url
   }
+
   render() {
     if (!this.entries || !this.entries.length) {
       return html`
-        <link rel="stylesheet" href="/css/maleneaf.css" />
         <div class="maf-search-tool">
           <h1>Blog Tool</h1>
           <p>No entries found</p>
         </div>
         `
     }
+    const filteredArticles: BlogEntry[] = this.filterArticles()
     return html`
-      <link rel="stylesheet" href="/css/maleneaf.css" />
       <div>
         <div class="maf-search-tool">
           <input type="text" />
           <details>
-            <summary>tags</summary>
+            <summary>Available Tags: ${this.tagSet.size} <br> Active Tags: ${this.activeTags.size}</summary>
             ${[...this.tagSet].map(tag => html`
-              <button type="button">${tag}</button>
+              <button class=${this.activeTags.has(tag)? 'btn-outline-active' : 'btn-outline'} type="button" @click="${() => this.toggleTag(tag)}">${tag}</button>
             `)}
           </details>
         </div>
         <div class="maf-articles">
-          ${this.entries.map(e =>
+          ${filteredArticles.map(e =>
             html`
               <article class="maf-article"  @click="${() => this.goToArticle(e.url)}">
                 <header>
