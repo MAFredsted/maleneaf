@@ -5,6 +5,9 @@ import type { MainPage } from '../../../types/eleventy.js'
 
 export default (data: MainPage ) => {
   const content = data.content || ''
+  const styles = data.styles
+  console.log('styles are:', styles)
+  
   return html`
     <!DOCTYPE html>
     <html lang="en">
@@ -14,7 +17,7 @@ export default (data: MainPage ) => {
       <title>Document</title>
        <link rel="stylesheet" href="/css/maleneaf.css">
        <link rel="icon" type="image/x-icon" href="/files/favicon.ico">
-       
+        ${styles.map((styleSheet: string) => html`<link rel="stylesheet" href="${styleSheet}">`)}
        <link rel="modulepreload" href="/node_modules/@lit-labs/ssr-client/lit-element-hydrate-support.js">
       <style>
         body[dsd-pending] {

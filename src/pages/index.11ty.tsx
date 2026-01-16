@@ -7,7 +7,8 @@ export const data = {
   eleventyNavigation: {
     key: 'Home',
     order: 1
-  }
+  },
+  styles: []
 }
 
 export default (data: MainPage ) => {

@@ -9,6 +9,7 @@ tags:
   - sandwich
 language: "EN"
 highlight: true
+styles: ["/css/maleneaf_article.css"]
 ---
 
 # Sandwiches are better

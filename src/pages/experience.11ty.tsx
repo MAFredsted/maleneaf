@@ -12,7 +12,8 @@ export const data = {
   eleventyNavigation: {
     key: 'CV',
     order: 2
-  }
+  },
+  styles: ["/css/maleneaf_cv.css"]
 }
 
 export default (data: WorkExperiencePageData) => {

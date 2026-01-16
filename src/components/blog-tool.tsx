@@ -1,4 +1,3 @@
-// ...existing code...
 import { html, css, LitElement, unsafeCSS, isServer} from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { baseStyles } from './baseStyles.js'
@@ -18,6 +17,9 @@ export class BlogTool extends LitElement {
         border-radius: 2rem;
         margin: 1rem;
         padding: 2rem;
+      }
+      .maf-article{
+
       }
     `
 
@@ -82,7 +84,7 @@ export class BlogTool extends LitElement {
     if (!this.entries || !this.entries.length) {
       return html`
         <div class="maf-search-tool">
-          <h1>Blog Tool</h1>
+          <h2>Blog Entries</h2>
           <p>No entries found</p>
         </div>
         `
@@ -90,6 +92,7 @@ export class BlogTool extends LitElement {
     const filteredArticles: BlogEntry[] = this.filterArticles()
     return html`
       <div>
+        <h2>Search Tools</h2>
         <div class="maf-search-tool">
           <input type="text" />
           <details>
@@ -99,6 +102,7 @@ export class BlogTool extends LitElement {
             `)}
           </details>
         </div>
+        <h2> Blog Entries </h2>
         <div class="maf-articles">
           ${filteredArticles.map(e =>
             html`

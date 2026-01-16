@@ -8,7 +8,8 @@ export const data = {
   eleventyNavigation: {
     key: 'Blog',
     order: 3
-  }
+  },
+  styles: []
 }
 export default (data: BlogEntriesOverview ) => {
   // filter your collection for /posts/ and map into a serializable subset
@@ -16,8 +17,10 @@ export default (data: BlogEntriesOverview ) => {
   const entriesJson = JSON.stringify(data.collections.posts)
   console.log('entries are', entriesJson)
   return html`
+    <head> 
+       <link rel="stylesheet" href="/css/maleneaf_cv.css">
+    </head>
     <main class="container bg-secondary-1">
-      <h1> This is the Blog Tool </h1>
       <blog-tool data-entries='${entriesJson}'></blog-tool>
     </main>
   `

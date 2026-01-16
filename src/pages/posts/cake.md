@@ -9,6 +9,7 @@ tags:
   - icecream
 language: "EN"
 highlight: true
+styles: ["/css/maleneaf_article.css"]
 ---
 
 # Icecream is good

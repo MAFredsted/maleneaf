@@ -100,6 +100,8 @@ export interface MainPage {
     [key: string]: PageData[]
   }
 
+  styles: string[]
+
   // Allow additional properties
   [key: string]: any
 }
