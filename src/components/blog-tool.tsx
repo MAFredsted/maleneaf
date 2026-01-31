@@ -52,6 +52,8 @@ export class BlogTool extends LitElement {
   @state() private tagSet: Set<string> = new Set<string>()
   @state() private activeTags: Set<string> = new Set<string>()
 
+  @state() private searchTimeout: ReturnType<typeof setTimeout> | undefined = undefined
+  @state() private searchQuery: string = ''
 
   onHydrated = (): void => {
     this.tagSet = new Set<string>(
@@ -71,8 +73,14 @@ export class BlogTool extends LitElement {
     }    
   }
 
-  
-  toggleTag = (tag: string) => {
+  debounce = ( cb: (query: string) => void, query: string,  delay: number  ) =>  {
+    if(this.searchTimeout != undefined) {
+      clearTimeout(this.searchTimeout)
+    }
+    this.searchTimeout = setTimeout(() => {cb(query); this.requestUpdate()}, delay )
+  }
+
+  toggleTag = (tag: string) =>  {
     if (this.activeTags.has(tag)) {
       this.activeTags.delete(tag)
     } else {
@@ -82,11 +90,14 @@ export class BlogTool extends LitElement {
   }
 
   filterArticles = () => {
-    if(this.activeTags.size === 0 ) {
-      return this.entries
+    let searchResults = this.entries
+    if (this.activeTags.size > 0) {
+      searchResults = searchResults.filter(entry => entry.tags.some(tag => this.activeTags.has(tag)))
     }
-    else return this.entries.filter(entry => entry.tags.some(tag => this.activeTags.has(tag)))
-
+    if (this.searchQuery.trim()) {
+      searchResults = searchResults.filter(entry => entry.title.toLowerCase().includes(this.searchQuery.trim().toLowerCase()))
+    }
+    return searchResults
   }
   goToArticle = (url: string) => {
     window.location.href=url
@@ -106,7 +117,11 @@ export class BlogTool extends LitElement {
       <div>
         <h2>Search Tools</h2>
         <div class="maf-search-tool">
-          <input type="text" />
+          <input type="text" @input="${(event: Event) => { 
+              const target = event.target as HTMLInputElement
+              this.debounce((query) => {this.searchQuery = query}, target.value, 700)
+            }
+          }" />
           <p>Active Tags: ${this.activeTags.size} </p>
           <details>
             <summary>Available Tags: ${this.tagSet.size} </summary>
