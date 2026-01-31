@@ -4,6 +4,7 @@ description: "Why Sandwiches beat icecream every day"
 layout: "base.11ty.tsx"
 date: 2025-12-19
 author: "Malene Andrä-Fredsted"
+image: "cake.png"
 tags: 
   - food
   - sandwich

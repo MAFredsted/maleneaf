@@ -11,15 +11,27 @@ export class BlogTool extends LitElement {
   static styles = [
     baseStyles,
     css`
-      .maf-articles,
       .maf-search-tool {
         border: 0.2rem solid var(--bg-secondary-2);
         border-radius: 2rem;
         margin: 1rem;
         padding: 2rem;
       }
-      .maf-article{
-
+      .maf-articles {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: var(--space-md);
+        align-items: stretch;
+      }
+      .nonActiveTag,
+      .activeTag {
+        cursor: pointer;
+        margin-left: var(--space-sm);
+      }
+      .activeTag,
+      .nonActiveTag:hover {
+        color: var(--color-maroon);
       }
     `
 
@@ -95,8 +107,9 @@ export class BlogTool extends LitElement {
         <h2>Search Tools</h2>
         <div class="maf-search-tool">
           <input type="text" />
+          <p>Active Tags: ${this.activeTags.size} </p>
           <details>
-            <summary>Available Tags: ${this.tagSet.size} <br> Active Tags: ${this.activeTags.size}</summary>
+            <summary>Available Tags: ${this.tagSet.size} </summary>
             ${[...this.tagSet].map(tag => html`
               <button class=${this.activeTags.has(tag)? 'btn-outline-active' : 'btn-outline'} type="button" @click="${() => this.toggleTag(tag)}">${tag}</button>
             `)}
@@ -106,14 +119,30 @@ export class BlogTool extends LitElement {
         <div class="maf-articles">
           ${filteredArticles.map(e =>
             html`
-              <article class="maf-article"  @click="${() => this.goToArticle(e.url)}">
+              <article class="maf-card"  @click="${() => this.goToArticle(e.url)}">
                 <header>
-                  ${e.title}
-                  ${e.author}
-                  ${e.language}
-                  ${e.date}
-                </header>
-                <p>
+                  <p class="maf-card-title">${e.title}</p>
+                  <div class="maf-card-image">
+                    <img src="/files/${e.image}" alt="Missing Image" />
+                  </div>
+                </header>               
+                <div class="maf-card-meta">
+                    <p class="maf-card-author">${e.author}</p>
+                    <p class="maf-card-language">${e.language}</p>
+                    <p class="maf-card-time"> ${new Date(e.date).toLocaleDateString('en-GB')} </p>
+                    <div class="maf-card-tags">
+                      <span class="maf-card-tags-label">tags:</span>
+                      <span class="maf-card-tags-list">
+                        ${ e.tags.map(tag => html`
+                          <p class="${this.activeTags.has(tag)? "activeTag" : "nonActiveTag"}"
+                             @click="${(event: Event) => { event.stopPropagation(); this.toggleTag(tag); }}">
+                            ${tag}
+                          </p>
+                        `)}
+                      </span>
+                    </div>
+                </div>
+                <p class="maf-card-text">
                   ${e.description}
                 </p>
               </article>

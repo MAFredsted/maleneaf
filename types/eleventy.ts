@@ -139,6 +139,7 @@ export interface BlogEntry {
   author: string
   tags: string[]
   date: Date
+  image: string
   language: 'DA' | 'EN' | 'DE'
   description: string
   highlight: boolean

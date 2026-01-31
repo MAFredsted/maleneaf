@@ -90,6 +90,8 @@ export default (eleventyConfig) => {
   eleventyConfig.addPassthroughCopy('node_modules/@lit-labs/ssr-client')
   eleventyConfig.addPassthroughCopy('node_modules/@webcomponents/template-shadowroot')
   eleventyConfig.addWatchTarget('src/components')
+  eleventyConfig.addWatchTarget('src/pages/css/maleneaf.css');
+  eleventyConfig.addWatchTarget('src/components/baseStyles.ts');
 
   // add data entry covering blog entries
   eleventyConfig.addCollection('posts', function (collectionApi) {
@@ -102,6 +104,7 @@ export default (eleventyConfig) => {
         author: postData.author || '[posts] Error: Post does not contain author attribute',
         tags: postData.tags || [],
         date: postData.date || null,
+        image: postData.image || '',
         language: postData.language || '',
         description: postData.description || '[posts] Error: Post does not contain summary attribute',
         highlight: postData.highlight || null
